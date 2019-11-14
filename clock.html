@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Display|Kumar+One+Outline&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background: linear-gradient(180deg,#fcd9c3, #f1a757);
+            margin-top:70px;
+            width:100vw;
+            height:100vh;
+        }
+   
+        #square{
+
+            width:400px;
+            height:580px;
+            background: rgb(255, 255, 255);
+            filter:drop-shadow(0px 0px 3px rgb(128, 72, 23));
+            border-radius: 55px;
+            z-index:-1;
+            position:relative;
+            margin:auto;
+        }
+        #clock {
+            width: 325px;
+            height: 325px;
+            background-image:url("clock_line.svg");
+            margin-left:37.5px;
+            top:40px;
+            position:relative;
+            z-index:0;
+            /* filter:drop-shadow(0px 0px 3px rgb(128, 72, 23)); */
+        }
+
+        #clock:hover{
+            border-radius:50%;
+            
+        }
+
+        #second {
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background: orange;
+            top: calc(50% - 1px);
+            transform: rotate(90deg);
+            transform-origin: right center;
+            border-radius: 3px;
+        }
+
+        #minute {
+            position: absolute;
+            width: 45%;
+            left: 5%;
+            height: 2px;
+            background: rgb(67, 67, 67);
+            top: calc(50% - 1px);
+            transform: rotate(90deg);
+            transform-origin: right center;
+            border-radius: 3px;
+        }
+
+        #hour {
+            position: absolute;
+            width: 25%;
+            left: 25%;
+            height: 2px;
+            background: rgb(0, 0, 0);
+            top: calc(50% - 1px);
+            transform: rotate(90deg);
+            transform-origin: right center;
+            border-radius: 3px;
+        }
+
+        #time2{
+
+            text-align: center;
+            margin-bottom:30px;
+            position:absolute;
+            left: 111.5px;
+            bottom: 10px;
+            position: absolute;
+            font-size: 67px;
+            font-family: 'Kumar One Outline', cursive;
+            font-family: 'Big Shoulders Display', cursive;
+            color: coral;
+            line-height: 60px;
+        }
+
+        #time3{
+            font-size: 45px;
+        }
+
+        #circle{
+
+            width:6px;
+            height:6px;
+            position:absolute;
+            background:black;
+            border-radius:50%;
+            top:calc(50% - 3px);
+            left:calc(50% - 3px);
+            
+        }
+        
+
+    </style>
+</head>
+<body>
+<div id="square">
+    <div id="clock">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+        <div id="circle"></div>
+    </div>
+    <p id=time2><span id=time></span><br><span id=time3></span></p>
+</div>
+   
+    <script>
+        let hour = document.getElementById("hour");
+        let minute = document.getElementById("minute");
+        let second = document.getElementById("second");
+        let time = document.getElementById("time");
+
+        let clock = () => {
+            let date = new Date();
+            let h = date.getHours();
+            let m = date.getMinutes();
+            let s = date.getSeconds();
+            hour.style.transform = `rotate( ${h*30+90}deg)`;
+            minute.style.transform = `rotate( ${m*6+90}deg)`;
+            second.style.transform = `rotate( ${s*6+90}deg)`;
+            
+            let y = date.getFullYear();
+            let mon = date.getMonth()+1;
+            let d = date.getDate();
+
+            time.innerText = y+"."+mon+"."+d;
+            // time.innerText  = date.toLocaleString("zh-tw");
+            time3.innerText = h+":"+m+":"+s;
+        }
+
+        clock();
+        setInterval(clock, 1000);
+    </script>
+</body>
+</html>
